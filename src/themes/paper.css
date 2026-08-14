@@ -1,0 +1,12 @@
+[data-theme='paper'] {
+  --bg: #f7f5ef;
+  --surface: #ffffff;
+  --border: #e0dbd0;
+  --text: #1e1c18;
+  --muted: #6d675c;
+  --accent: #a6501e;
+  --accent-soft: #a6501e18;
+  --radius: 4px;
+  --font: 'Iowan Old Style', Georgia, serif;
+  --mono: ui-monospace, Menlo, monospace;
+}

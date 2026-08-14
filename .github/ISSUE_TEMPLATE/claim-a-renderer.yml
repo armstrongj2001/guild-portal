@@ -1,0 +1,20 @@
+name: Claim a renderer
+description: Call dibs on an event kind so two people don't build the same one.
+title: 'renderer: <kind>'
+labels: [renderer, claimed]
+body:
+  - type: input
+    id: kind
+    attributes:
+      label: Event kind
+      description: The `kind` value your renderer will match (e.g. release, star, fork).
+      placeholder: release
+    validations:
+      required: true
+  - type: textarea
+    id: plan
+    attributes:
+      label: What will it look like?
+      description: A sentence is enough.
+    validations:
+      required: false

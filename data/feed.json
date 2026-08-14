@@ -1,0 +1,500 @@
+[
+  {
+    "id": "note-2026-08-14-armstrongj2001.md",
+    "kind": "note",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-14T12:00:00.000Z",
+    "url": "https://github.com/armstrongj2001/guild-build-log",
+    "title": "Guild Build Log is live",
+    "body": "First ship note. This file is also the template — copy it to\n`notes/YYYY-MM-DD-<your-handle>.md`, edit the frontmatter, write whatever you\nwant below the fence, open a PR. No code, no build step, no account beyond\nGitHub.",
+    "meta": {
+      "tags": [
+        "kickoff",
+        "meta"
+      ]
+    }
+  },
+  {
+    "id": "gh-13085216066",
+    "kind": "pr",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-11T06:00:12Z",
+    "repo": "block/buzz",
+    "url": "https://github.com/block/buzz",
+    "title": "reopened a pull request in block/buzz",
+    "meta": {
+      "eventType": "PullRequestEvent",
+      "payload": {
+        "action": "reopened",
+        "number": 4846
+      }
+    }
+  },
+  {
+    "id": "gh-13085009301",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-11T05:54:00Z",
+    "repo": "anthropics/cwc-workshops",
+    "url": "https://github.com/anthropics/cwc-workshops",
+    "title": "star in anthropics/cwc-workshops",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-13046583523",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-10T13:48:06Z",
+    "repo": "keijiro/Jacquard",
+    "url": "https://github.com/keijiro/Jacquard",
+    "title": "star in keijiro/Jacquard",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-13009246890",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-09T19:00:00Z",
+    "repo": "ShawnPana/phone-harness",
+    "url": "https://github.com/ShawnPana/phone-harness",
+    "title": "star in ShawnPana/phone-harness",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12996308142",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-09T08:35:53Z",
+    "repo": "jon-devlapaz/tink-skills",
+    "url": "https://github.com/jon-devlapaz/tink-skills",
+    "title": "star in jon-devlapaz/tink-skills",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-17161125628",
+    "kind": "push",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-09T02:48:48Z",
+    "repo": "armstrongj2001/nexus-agent-os",
+    "url": "https://github.com/armstrongj2001/nexus-agent-os",
+    "title": "pushed 0 commit(s) to armstrongj2001/nexus-agent-os",
+    "meta": {
+      "eventType": "PushEvent",
+      "payload": {
+        "branch": "feature/nexus-control-plane",
+        "commits": []
+      }
+    }
+  },
+  {
+    "id": "gh-17160483819",
+    "kind": "create",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-09T02:29:20Z",
+    "repo": "armstrongj2001/nexus-agent-os",
+    "url": "https://github.com/armstrongj2001/nexus-agent-os",
+    "title": "create in armstrongj2001/nexus-agent-os",
+    "meta": {
+      "eventType": "CreateEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12968853186",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-08T06:03:49Z",
+    "repo": "cloudflare/computer",
+    "url": "https://github.com/cloudflare/computer",
+    "title": "star in cloudflare/computer",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12968739137",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-08T05:56:40Z",
+    "repo": "BOMWiki/partmode",
+    "url": "https://github.com/BOMWiki/partmode",
+    "title": "star in BOMWiki/partmode",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12967925274",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-08T05:06:07Z",
+    "repo": "rlaope/oh-my-hermes",
+    "url": "https://github.com/rlaope/oh-my-hermes",
+    "title": "star in rlaope/oh-my-hermes",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-13085214260",
+    "kind": "pr",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-06T17:21:39Z",
+    "repo": "block/buzz",
+    "url": "https://github.com/block/buzz",
+    "title": "closed a pull request in block/buzz",
+    "meta": {
+      "eventType": "PullRequestEvent",
+      "payload": {
+        "action": "closed",
+        "number": 4846
+      }
+    }
+  },
+  {
+    "id": "gh-12893005658",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-06T16:29:38Z",
+    "repo": "asimons81/hermes-gpt",
+    "url": "https://github.com/asimons81/hermes-gpt",
+    "title": "star in asimons81/hermes-gpt",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12826272929",
+    "kind": "pr",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-05T14:23:10Z",
+    "repo": "block/buzz",
+    "url": "https://github.com/block/buzz",
+    "title": "opened a pull request in block/buzz",
+    "meta": {
+      "eventType": "PullRequestEvent",
+      "payload": {
+        "action": "opened",
+        "number": 4894
+      }
+    }
+  },
+  {
+    "id": "gh-16817057260",
+    "kind": "create",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-05T14:22:57Z",
+    "repo": "armstrongj2001/buzz",
+    "url": "https://github.com/armstrongj2001/buzz",
+    "title": "create in armstrongj2001/buzz",
+    "meta": {
+      "eventType": "CreateEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12802965850",
+    "kind": "pr",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-05T06:18:32Z",
+    "repo": "block/buzz",
+    "url": "https://github.com/block/buzz",
+    "title": "opened a pull request in block/buzz",
+    "meta": {
+      "eventType": "PullRequestEvent",
+      "payload": {
+        "action": "opened",
+        "number": 4846
+      }
+    }
+  },
+  {
+    "id": "gh-16769890707",
+    "kind": "create",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-05T06:18:17Z",
+    "repo": "armstrongj2001/buzz",
+    "url": "https://github.com/armstrongj2001/buzz",
+    "title": "create in armstrongj2001/buzz",
+    "meta": {
+      "eventType": "CreateEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12802110113",
+    "kind": "fork",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-05T05:55:22Z",
+    "repo": "block/buzz",
+    "url": "https://github.com/block/buzz",
+    "title": "fork in block/buzz",
+    "meta": {
+      "eventType": "ForkEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12728012799",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-03T23:35:45Z",
+    "repo": "xai-org/grok-build",
+    "url": "https://github.com/xai-org/grok-build",
+    "title": "star in xai-org/grok-build",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12706963700",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-03T15:37:42Z",
+    "repo": "golemcloud/golem-ai",
+    "url": "https://github.com/golemcloud/golem-ai",
+    "title": "star in golemcloud/golem-ai",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12678209173",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-03T05:36:18Z",
+    "repo": "asimons81/hermes-desktop-achievements",
+    "url": "https://github.com/asimons81/hermes-desktop-achievements",
+    "title": "star in asimons81/hermes-desktop-achievements",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12651970359",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-02T08:56:26Z",
+    "repo": "robiot/fable-os",
+    "url": "https://github.com/robiot/fable-os",
+    "title": "star in robiot/fable-os",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12642144413",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-01T23:19:37Z",
+    "repo": "block/buzz",
+    "url": "https://github.com/block/buzz",
+    "title": "star in block/buzz",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12635987580",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-08-01T17:48:00Z",
+    "repo": "oso95/scroll-world",
+    "url": "https://github.com/oso95/scroll-world",
+    "title": "star in oso95/scroll-world",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12503600740",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-29T23:16:28Z",
+    "repo": "microsoft/TRELLIS.2",
+    "url": "https://github.com/microsoft/TRELLIS.2",
+    "title": "star in microsoft/TRELLIS.2",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12423949133",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-28T15:50:31Z",
+    "repo": "drjeff-ai/linkedin-autocomment",
+    "url": "https://github.com/drjeff-ai/linkedin-autocomment",
+    "title": "star in drjeff-ai/linkedin-autocomment",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12283303920",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-25T07:16:18Z",
+    "repo": "Leonxlnx/taste-skill",
+    "url": "https://github.com/Leonxlnx/taste-skill",
+    "title": "star in Leonxlnx/taste-skill",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12283263261",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-25T07:14:27Z",
+    "repo": "pbakaus/impeccable",
+    "url": "https://github.com/pbakaus/impeccable",
+    "title": "star in pbakaus/impeccable",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12258785885",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-24T15:50:23Z",
+    "repo": "upstash/context7",
+    "url": "https://github.com/upstash/context7",
+    "title": "star in upstash/context7",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12117373104",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-22T04:46:46Z",
+    "repo": "dbeaver/dbeaver",
+    "url": "https://github.com/dbeaver/dbeaver",
+    "title": "star in dbeaver/dbeaver",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12117357345",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-22T04:46:14Z",
+    "repo": "rottenwheel/bitcoin-only-hugo",
+    "url": "https://github.com/rottenwheel/bitcoin-only-hugo",
+    "title": "star in rottenwheel/bitcoin-only-hugo",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-12117353432",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-22T04:46:04Z",
+    "repo": "bitcoin-only/bitcoin-only",
+    "url": "https://github.com/bitcoin-only/bitcoin-only",
+    "title": "star in bitcoin-only/bitcoin-only",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-11999939513",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-20T01:30:14Z",
+    "repo": "ayghri/i-have-adhd",
+    "url": "https://github.com/ayghri/i-have-adhd",
+    "title": "star in ayghri/i-have-adhd",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-11971138245",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-18T17:09:44Z",
+    "repo": "scion-frontiers/farmtable",
+    "url": "https://github.com/scion-frontiers/farmtable",
+    "title": "star in scion-frontiers/farmtable",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-11971130929",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-18T17:09:18Z",
+    "repo": "luckeyfaraday/athena-graphs",
+    "url": "https://github.com/luckeyfaraday/athena-graphs",
+    "title": "star in luckeyfaraday/athena-graphs",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-11971089701",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-18T17:06:47Z",
+    "repo": "pskoett/pmx-canvas",
+    "url": "https://github.com/pskoett/pmx-canvas",
+    "title": "star in pskoett/pmx-canvas",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  },
+  {
+    "id": "gh-11971056135",
+    "kind": "star",
+    "actor": "armstrongj2001",
+    "timestamp": "2026-07-18T17:04:51Z",
+    "repo": "baldaworks/callee",
+    "url": "https://github.com/baldaworks/callee",
+    "title": "star in baldaworks/callee",
+    "meta": {
+      "eventType": "WatchEvent",
+      "payload": {}
+    }
+  }
+]
