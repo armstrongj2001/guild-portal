@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: refresh
@@ -31,3 +33,13 @@ jobs:
           git add data/feed.json
           git diff --cached --quiet || git commit -m "chore: refresh feed"
           git push
+
+  # A push made with GITHUB_TOKEN does not trigger other workflows, so the
+  # deploy has to be called directly or fresh data never reaches the page.
+  deploy:
+    needs: refresh
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
