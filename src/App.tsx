@@ -5,6 +5,7 @@ import { useAuth } from './lib/auth';
 import { usePath } from './lib/router';
 import { isLive } from './lib/supabase';
 import { Header } from './components/Header';
+import { Palette } from './components/Palette';
 import { SignInDialog } from './components/SignInDialog';
 import { SubmitDialog } from './components/SubmitDialog';
 import { Home } from './pages/Home';
@@ -17,7 +18,7 @@ export default function App() {
   const [cheers, setCheers] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [dialog, setDialog] = useState<'submit' | 'signin' | null>(null);
-  const [query, setQuery] = useState('');
+  const [palette, setPalette] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -30,6 +31,17 @@ export default function App() {
         setLoading(false);
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setPalette(true);
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, []);
 
   useEffect(() => {
@@ -74,8 +86,7 @@ export default function App() {
         onSubmit={openSubmit}
         onSignIn={() => setDialog('signin')}
         onHome={() => navigate('/')}
-        query={slug ? undefined : query}
-        onQuery={slug ? undefined : setQuery}
+        onSearch={() => setPalette(true)}
       />
 
       {!isLive ? (
@@ -110,7 +121,6 @@ export default function App() {
             onOpen={(s) => navigate(`/p/${s}`)}
             onCheer={(id) => void cheer(id)}
             onSubmit={openSubmit}
-            query={query}
           />
         )}
       </main>
@@ -119,6 +129,17 @@ export default function App() {
         <span>Built by the AI Builders Guild.</span>
         <a href="https://github.com/armstrongj2001/guild-portal">Source ↗</a>
       </footer>
+
+      {palette ? (
+        <Palette
+          projects={projects}
+          onOpen={(s) => {
+            setPalette(false);
+            navigate(`/p/${s}`);
+          }}
+          onClose={() => setPalette(false)}
+        />
+      ) : null}
 
       {dialog === 'signin' ? <SignInDialog onClose={() => setDialog(null)} /> : null}
       {dialog === 'submit' ? (

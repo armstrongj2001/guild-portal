@@ -1,5 +1,6 @@
 import type { Project } from '../types';
 import { Avatar } from './Avatar';
+import { Icon } from './Icon';
 
 type Builder = {
   handle: string;
@@ -27,7 +28,9 @@ export function Sidebar({
     <aside className="sidebar">
       <section className="panel">
         <header className="panel__head">
-          <h2>Guild builders</h2>
+          <h2>
+            <Icon name="trophy" size={13} /> Guild builders
+          </h2>
           <span>{builders.length} active</span>
         </header>
         {builders.length ? (
@@ -56,7 +59,9 @@ export function Sidebar({
 
       <section className="panel">
         <header className="panel__head">
-          <h2>What people build with</h2>
+          <h2>
+            <Icon name="tag" size={13} /> What people build with
+          </h2>
         </header>
         {tags.length ? (
           <div className="cloud">
@@ -76,7 +81,9 @@ export function Sidebar({
       </section>
 
       <section className="panel panel--cta">
-        <h2>Working on something?</h2>
+        <h2>
+          <Icon name="sparkle" size={15} /> Working on something?
+        </h2>
         <p>
           Half-finished is welcome. Say what you want feedback on and the guild will tell you
           straight.

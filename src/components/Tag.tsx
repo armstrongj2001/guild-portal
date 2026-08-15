@@ -1,3 +1,5 @@
+import { Icon } from './Icon';
+
 export function Tag({
   label,
   active,
@@ -16,6 +18,14 @@ export function Tag({
   );
 }
 
+const STAGE_ICON = { idea: 'flask', building: 'hammer', live: 'check' } as const;
+
 export function StageBadge({ stage }: { stage: string }) {
-  return <span className={`stage stage--${stage}`}>{stage}</span>;
+  const icon = STAGE_ICON[stage as keyof typeof STAGE_ICON];
+  return (
+    <span className={`stage stage--${stage}`}>
+      {icon ? <Icon name={icon} size={11} /> : null}
+      {stage}
+    </span>
+  );
 }

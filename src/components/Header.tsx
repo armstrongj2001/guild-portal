@@ -1,33 +1,19 @@
-import { useEffect, useRef } from 'react';
 import { useAuth } from '../lib/auth';
 import { Avatar } from './Avatar';
+import { Icon } from './Icon';
 
 export function Header({
   onSubmit,
   onSignIn,
   onHome,
-  query,
-  onQuery,
+  onSearch,
 }: {
   onSubmit: () => void;
   onSignIn: () => void;
   onHome: () => void;
-  query?: string;
-  onQuery?: (value: string) => void;
+  onSearch: () => void;
 }) {
   const { profile, signOut } = useAuth();
-  const search = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        search.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, []);
 
   return (
     <header className="header">
@@ -42,26 +28,15 @@ export function Header({
           </span>
         </button>
 
-        {onQuery ? (
-          <label className="search">
-            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" strokeWidth="2" />
-              <path d="m20 20-4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            <input
-              ref={search}
-              value={query ?? ''}
-              onChange={(e) => onQuery(e.target.value)}
-              placeholder="Search projects, builders, tags…"
-              type="search"
-            />
-            <kbd>⌘K</kbd>
-          </label>
-        ) : null}
+        <button className="search" onClick={onSearch}>
+          <Icon name="search" size={15} />
+          <span>Search projects, builders, tags…</span>
+          <kbd>⌘K</kbd>
+        </button>
 
         <div className="header__actions">
           <button className="btn btn--primary" onClick={onSubmit}>
-            Share a project
+            <Icon name="plus" size={14} /> Share a project
           </button>
           {profile ? (
             <div className="account">

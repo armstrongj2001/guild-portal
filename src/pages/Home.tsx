@@ -20,7 +20,6 @@ export function Home({
   onOpen,
   onCheer,
   onSubmit,
-  query,
 }: {
   projects: Project[];
   cheers: Set<string>;
@@ -28,7 +27,6 @@ export function Home({
   onOpen: (slug: string) => void;
   onCheer: (id: string) => void;
   onSubmit: () => void;
-  query: string;
 }) {
   const [sort, setSort] = useState<Sort>('newest');
   const [filter, setFilter] = useState<Filter>('all');
@@ -54,13 +52,10 @@ export function Home({
   ];
 
   const visible = useMemo(() => {
-    const q = query.trim().toLowerCase();
     const list = projects.filter((p) => {
       if (tag && !p.tags.includes(tag)) return false;
       if (filter === 'feedback' && !p.feedback_wanted) return false;
       if (filter !== 'all' && filter !== 'feedback' && p.stage !== filter) return false;
-      if (q && !`${p.title} ${p.tagline} ${p.owner_handle} ${p.tags.join(' ')}`.toLowerCase().includes(q))
-        return false;
       return true;
     });
 
@@ -70,7 +65,7 @@ export function Home({
       discussed: (a, b) => b.comment_count - a.comment_count,
     };
     return [...list].sort(sorters[sort]);
-  }, [projects, sort, filter, tag, query]);
+  }, [projects, sort, filter, tag]);
 
   return (
     <>
