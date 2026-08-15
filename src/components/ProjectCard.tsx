@@ -38,6 +38,9 @@ export function ProjectCard({
 
       <h3 className="card__title">{project.title}</h3>
       <p className="card__tagline">{project.tagline}</p>
+      {project.description ? (
+        <p className="card__desc">{project.description.split('\n')[0]}</p>
+      ) : null}
 
       {project.feedback_wanted ? (
         <p className="card__asking">

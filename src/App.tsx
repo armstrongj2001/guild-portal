@@ -17,6 +17,7 @@ export default function App() {
   const [cheers, setCheers] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [dialog, setDialog] = useState<'submit' | 'signin' | null>(null);
+  const [query, setQuery] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -65,7 +66,6 @@ export default function App() {
   );
 
   const openSubmit = () => setDialog(profile ? 'submit' : 'signin');
-
   const slug = path.startsWith('/p/') ? path.slice(3) : null;
 
   return (
@@ -74,6 +74,8 @@ export default function App() {
         onSubmit={openSubmit}
         onSignIn={() => setDialog('signin')}
         onHome={() => navigate('/')}
+        query={slug ? undefined : query}
+        onQuery={slug ? undefined : setQuery}
       />
 
       {!isLive ? (
@@ -83,17 +85,23 @@ export default function App() {
         </p>
       ) : null}
 
-      <main className="main">
-        {error ? <p className="notice notice--bad">{error}</p> : null}
+      <main>
+        {error ? (
+          <div className="main">
+            <p className="notice notice--bad">{error}</p>
+          </div>
+        ) : null}
 
         {slug ? (
-          <ProjectPage
-            slug={slug}
-            cheers={cheers}
-            onCheer={(id) => void cheer(id)}
-            onBack={() => navigate('/')}
-            onSignIn={() => setDialog('signin')}
-          />
+          <div className="main">
+            <ProjectPage
+              slug={slug}
+              cheers={cheers}
+              onCheer={(id) => void cheer(id)}
+              onBack={() => navigate('/')}
+              onSignIn={() => setDialog('signin')}
+            />
+          </div>
         ) : (
           <Home
             projects={projects}
@@ -102,6 +110,7 @@ export default function App() {
             onOpen={(s) => navigate(`/p/${s}`)}
             onCheer={(id) => void cheer(id)}
             onSubmit={openSubmit}
+            query={query}
           />
         )}
       </main>

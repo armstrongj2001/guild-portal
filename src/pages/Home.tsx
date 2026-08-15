@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react';
-import type { Project } from '../types';
+import type { Project, Stage } from '../types';
 import { ProjectCard } from '../components/ProjectCard';
+import { Sidebar } from '../components/Sidebar';
+import { StatsBar } from '../components/StatsBar';
 
-type Sort = 'newest' | 'cheered' | 'feedback';
+type Filter = 'all' | Stage | 'feedback';
+type Sort = 'newest' | 'cheered' | 'discussed';
 
 const SORTS: { value: Sort; label: string }[] = [
   { value: 'newest', label: 'Newest' },
   { value: 'cheered', label: 'Most cheered' },
-  { value: 'feedback', label: 'Wants feedback' },
+  { value: 'discussed', label: 'Most discussed' },
 ];
 
 export function Home({
@@ -17,6 +20,7 @@ export function Home({
   onOpen,
   onCheer,
   onSubmit,
+  query,
 }: {
   projects: Project[];
   cheers: Set<string>;
@@ -24,109 +28,148 @@ export function Home({
   onOpen: (slug: string) => void;
   onCheer: (id: string) => void;
   onSubmit: () => void;
+  query: string;
 }) {
   const [sort, setSort] = useState<Sort>('newest');
+  const [filter, setFilter] = useState<Filter>('all');
   const [tag, setTag] = useState<string | null>(null);
-  const [query, setQuery] = useState('');
 
-  const tags = useMemo(
-    () => [...new Set(projects.flatMap((p) => p.tags))].sort().slice(0, 12),
+  const counts = useMemo(
+    () => ({
+      all: projects.length,
+      idea: projects.filter((p) => p.stage === 'idea').length,
+      building: projects.filter((p) => p.stage === 'building').length,
+      live: projects.filter((p) => p.stage === 'live').length,
+      feedback: projects.filter((p) => p.feedback_wanted).length,
+    }),
     [projects],
   );
 
+  const filters: { value: Filter; label: string }[] = [
+    { value: 'all', label: 'All' },
+    { value: 'idea', label: 'Ideas' },
+    { value: 'building', label: 'Building' },
+    { value: 'live', label: 'Live' },
+    { value: 'feedback', label: 'Wants feedback' },
+  ];
+
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
-    let list = projects.filter(
-      (p) =>
-        (!tag || p.tags.includes(tag)) &&
-        (!q ||
-          `${p.title} ${p.tagline} ${p.owner_handle} ${p.tags.join(' ')}`.toLowerCase().includes(q)),
-    );
+    const list = projects.filter((p) => {
+      if (tag && !p.tags.includes(tag)) return false;
+      if (filter === 'feedback' && !p.feedback_wanted) return false;
+      if (filter !== 'all' && filter !== 'feedback' && p.stage !== filter) return false;
+      if (q && !`${p.title} ${p.tagline} ${p.owner_handle} ${p.tags.join(' ')}`.toLowerCase().includes(q))
+        return false;
+      return true;
+    });
 
-    if (sort === 'cheered') list = [...list].sort((a, b) => b.cheer_count - a.cheer_count);
-    if (sort === 'feedback') list = list.filter((p) => p.feedback_wanted);
-    return list;
-  }, [projects, sort, tag, query]);
+    const sorters: Record<Sort, (a: Project, b: Project) => number> = {
+      newest: (a, b) => b.created_at.localeCompare(a.created_at),
+      cheered: (a, b) => b.cheer_count - a.cheer_count,
+      discussed: (a, b) => b.comment_count - a.comment_count,
+    };
+    return [...list].sort(sorters[sort]);
+  }, [projects, sort, filter, tag, query]);
 
   return (
     <>
-      <section className="hero">
-        <h1>What the guild is building</h1>
-        <p>
-          Share what you're working on — polished or half-broken — and get real feedback from people
-          who build the same things you do.
-        </p>
-        <button className="btn btn--primary btn--lg" onClick={onSubmit}>
-          Share a project
-        </button>
-      </section>
+      <StatsBar projects={projects} />
 
-      <div className="toolbar">
-        <div className="segmented">
-          {SORTS.map((option) => (
-            <button
-              key={option.value}
-              className={sort === option.value ? 'is-active' : ''}
-              onClick={() => setSort(option.value)}
-            >
-              {option.label}
-            </button>
-          ))}
+      <div className="main">
+        <div className="layout">
+          <div className="feed">
+            <section className="hero">
+              <span className="eyebrow">AI Builders Guild</span>
+              <h1>
+                What the guild <em>is building</em>
+              </h1>
+              <p>
+                Post what you're working on — polished or half-broken — say what you want feedback
+                on, and get answers from people who build the same things you do.
+              </p>
+              <button className="btn btn--primary" onClick={onSubmit}>
+                Share a project
+              </button>
+            </section>
+
+            <div className="toolbar">
+              <div className="filters">
+                {filters.map((option) => (
+                  <button
+                    key={option.value}
+                    className={filter === option.value ? 'is-active' : ''}
+                    onClick={() => setFilter(option.value)}
+                  >
+                    {option.label}
+                    <em>{counts[option.value]}</em>
+                  </button>
+                ))}
+              </div>
+
+              <label className="sort">
+                <span>Sort</span>
+                <select value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
+                  {SORTS.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            {tag ? (
+              <button className="activetag" onClick={() => setTag(null)}>
+                #{tag} <span>clear ✕</span>
+              </button>
+            ) : null}
+
+            {loading ? (
+              <div className="cards">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="card card--skeleton" />
+                ))}
+              </div>
+            ) : visible.length ? (
+              <div className="cards">
+                {visible.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    cheered={cheers.has(project.id)}
+                    onOpen={() => onOpen(project.slug)}
+                    onCheer={() => onCheer(project.id)}
+                    onTag={setTag}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="empty">
+                <h2>{projects.length ? 'Nothing matches that.' : 'The feed is waiting.'}</h2>
+                <p>
+                  {projects.length
+                    ? 'Try a different filter or clear the search.'
+                    : 'Be the first to post — one line about what you are building is enough to start.'}
+                </p>
+                <button
+                  className="btn btn--primary"
+                  onClick={() => {
+                    if (projects.length) {
+                      setFilter('all');
+                      setTag(null);
+                    } else onSubmit();
+                  }}
+                >
+                  {projects.length ? 'Clear filters' : 'Share the first project'}
+                </button>
+              </div>
+            )}
+          </div>
+
+          <Sidebar projects={projects} activeTag={tag} onTag={setTag} onSubmit={onSubmit} />
         </div>
-
-        <input
-          className="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search projects…"
-          type="search"
-        />
       </div>
-
-      {tags.length ? (
-        <div className="tagbar">
-          <button className={tag === null ? 'is-active' : ''} onClick={() => setTag(null)}>
-            All
-          </button>
-          {tags.map((t) => (
-            <button
-              key={t}
-              className={tag === t ? 'is-active' : ''}
-              onClick={() => setTag(tag === t ? null : t)}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-      ) : null}
-
-      {loading ? (
-        <div className="grid">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="card card--skeleton" />
-          ))}
-        </div>
-      ) : visible.length ? (
-        <div className="grid">
-          {visible.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              cheered={cheers.has(project.id)}
-              onOpen={() => onOpen(project.slug)}
-              onCheer={() => onCheer(project.id)}
-              onTag={setTag}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="empty">
-          <p>Nothing here yet.</p>
-          <button className="btn btn--primary" onClick={onSubmit}>
-            Be the first to share
-          </button>
-        </div>
-      )}
     </>
   );
 }
