@@ -11,6 +11,8 @@ html {
 body {
   margin: 0;
   background: var(--bg);
+  background-image: radial-gradient(60rem 30rem at 50% -8rem, #8b7cff14, transparent 70%);
+  background-repeat: no-repeat;
   color: var(--text);
   font-family: var(--font);
   line-height: 1.55;
@@ -21,8 +23,25 @@ h1,
 h2,
 h3 {
   margin: 0;
-  letter-spacing: -0.021em;
-  line-height: 1.2;
+  letter-spacing: -0.028em;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+/* Mono is reserved for machine facts: handles, timestamps, tags, counts. */
+.mono,
+.card__who span,
+.detail__who span,
+.comments__meta span,
+.comments__meta time,
+.tag,
+.stage,
+.cheer span,
+.card__links,
+.hint,
+.brand__text small {
+  font-family: var(--mono);
+  font-variant-ligatures: none;
 }
 
 p {
@@ -79,9 +98,9 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  background: var(--bg-overlay);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .header__inner {
@@ -110,10 +129,10 @@ textarea {
   place-items: center;
   width: 34px;
   height: 34px;
-  border-radius: 10px;
-  background: var(--accent);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(140deg, var(--accent), #6f5ce8);
   color: var(--accent-ink);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .brand__text {
@@ -129,7 +148,9 @@ textarea {
 
 .brand__text small {
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: var(--dim);
 }
 
 .header__actions {
@@ -177,19 +198,20 @@ textarea {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  padding: 0.52rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  background: var(--surface);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
   color: var(--text);
-  font-size: 0.88rem;
-  font-weight: 550;
+  font-size: 0.86rem;
+  font-weight: 600;
   transition: 0.14s ease;
   text-decoration: none;
 }
 
 .btn:hover {
-  background: var(--surface-2);
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
   text-decoration: none;
   transform: translateY(-1px);
 }
@@ -282,13 +304,13 @@ textarea {
 }
 
 .hero {
-  padding: 3.5rem 0 2.25rem;
-  max-width: 34rem;
+  padding: 4rem 0 2.5rem;
+  max-width: 36rem;
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 5vw, 2.9rem);
-  letter-spacing: -0.03em;
+  font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+  letter-spacing: -0.038em;
 }
 
 .hero p {
@@ -312,17 +334,17 @@ textarea {
   padding: 3px;
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: var(--radius);
 }
 
 .segmented button {
   border: 0;
   background: none;
   padding: 0.35rem 0.85rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   color: var(--muted);
-  font-size: 0.84rem;
-  font-weight: 550;
+  font-size: 0.8rem;
+  font-weight: 600;
   transition: 0.14s ease;
 }
 
@@ -339,8 +361,9 @@ textarea {
   padding: 0.48rem 0.85rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 0.86rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 0.82rem;
 }
 
 .search::placeholder {
@@ -358,9 +381,10 @@ textarea {
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text-2);
-  padding: 0.25rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.79rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--mono);
+  font-size: 0.75rem;
   transition: 0.14s ease;
 }
 
@@ -388,7 +412,7 @@ textarea {
   gap: 0.55rem;
   padding: 1.15rem;
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   transition: 0.16s ease;
@@ -396,7 +420,7 @@ textarea {
 
 .card:hover {
   transform: translateY(-2px);
-  border-color: var(--border-strong);
+  border-color: var(--accent-line);
   box-shadow: var(--shadow-lg);
 }
 
@@ -466,8 +490,9 @@ textarea {
 
 .card__asking-label {
   display: block;
+  font-family: var(--mono);
   color: var(--accent);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 650;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -498,7 +523,7 @@ textarea {
 
 .card--skeleton {
   height: 230px;
-  background: linear-gradient(100deg, var(--surface) 40%, var(--surface-2) 50%, var(--surface) 60%);
+  background: linear-gradient(100deg, var(--surface) 40%, var(--surface-hover) 50%, var(--surface) 60%);
   background-size: 300% 100%;
   animation: shimmer 1.4s infinite linear;
   box-shadow: none;
@@ -517,12 +542,12 @@ textarea {
 /* ---------------------------------------------------------- tags & stages */
 .tag {
   display: inline-block;
-  padding: 0.15rem 0.55rem;
-  border-radius: 999px;
+  padding: 0.13rem 0.5rem;
+  border-radius: var(--radius-xs);
   background: var(--surface-2);
   border: 1px solid var(--border);
-  color: var(--text-2);
-  font-size: 0.74rem;
+  color: var(--muted);
+  font-size: 0.71rem;
 }
 
 .tag--button:hover {
@@ -531,12 +556,12 @@ textarea {
 }
 
 .stage {
-  padding: 0.12rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 650;
-  letter-spacing: 0.03em;
-  text-transform: capitalize;
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
 
 .stage--idea {
@@ -559,12 +584,12 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   transition: 0.14s ease;
 }
@@ -587,7 +612,7 @@ textarea {
 
 /* ----------------------------------------------------------------- avatar */
 .avatar {
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -668,8 +693,9 @@ textarea {
 }
 
 .asking h2 {
+  font-family: var(--mono);
   color: var(--accent);
-  font-size: 0.7rem;
+  font-size: 0.67rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -722,6 +748,7 @@ textarea {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  font-size: 0.9rem;
 }
 
 .composer textarea:focus {
@@ -796,7 +823,7 @@ textarea {
   display: grid;
   place-items: center;
   padding: 1.25rem;
-  background: #1c191759;
+  background: #05040ab8;
   backdrop-filter: blur(3px);
   animation: fade 0.15s ease;
 }
@@ -809,7 +836,7 @@ textarea {
   flex-direction: column;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   animation: rise 0.18s ease;
 }
@@ -906,7 +933,7 @@ textarea {
 .field textarea {
   width: 100%;
   padding: 0.55rem 0.75rem;
-  background: var(--bg-tint);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
@@ -914,8 +941,9 @@ textarea {
 
 .field input:focus,
 .field textarea:focus {
-  background: var(--surface);
+  background: var(--surface-2);
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
   outline: none;
 }
 
@@ -933,12 +961,12 @@ textarea {
 }
 
 .chip {
-  padding: 0.3rem 0.75rem;
-  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--surface-2);
   color: var(--text-2);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   transition: 0.14s ease;
 }
 
