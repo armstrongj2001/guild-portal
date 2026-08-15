@@ -26,3 +26,9 @@ dist-ssr
 # Local env
 .env
 .env.local
+
+workforces/tmp
+
+workforces/session-context/*
+
+!workforces/session-context/.gitkeep
