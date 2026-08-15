@@ -17,6 +17,7 @@ export default function App() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [cheers, setCheers] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [sample, setSample] = useState(false);
   const [dialog, setDialog] = useState<'submit' | 'signin' | null>(null);
   const [palette, setPalette] = useState(false);
   const [error, setError] = useState('');
@@ -24,7 +25,9 @@ export default function App() {
   useEffect(() => {
     void (async () => {
       try {
-        setProjects(await listProjects());
+        const feed = await listProjects();
+        setProjects(feed.projects);
+        setSample(feed.sample);
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Could not load projects.');
       } finally {
@@ -70,7 +73,7 @@ export default function App() {
       try {
         await toggleCheer(projectId, profile.id);
       } catch {
-        setProjects(await listProjects());
+        setProjects((await listProjects()).projects);
         setCheers(await listMyCheers(profile.id));
       }
     },
@@ -89,10 +92,12 @@ export default function App() {
         onSearch={() => setPalette(true)}
       />
 
-      {!isLive ? (
+      {sample ? (
         <p className="banner">
-          <strong>Demo mode.</strong> You're seeing sample projects — sign in, post, and comment all
-          work, but nothing is saved. Connect Supabase to go live.
+          <strong>{isLive ? 'Sample projects.' : 'Demo mode.'}</strong>{' '}
+          {isLive
+            ? 'Your database is connected but empty — these examples show what the feed looks like. Post the first real project and they disappear.'
+            : "You're seeing sample projects — sign in, post, and comment all work, but nothing is saved. Connect Supabase to go live."}
         </p>
       ) : null}
 
@@ -146,7 +151,8 @@ export default function App() {
         <SubmitDialog
           onClose={() => setDialog(null)}
           onCreated={(project) => {
-            setProjects((prev) => [project, ...prev]);
+            setProjects((prev) => (sample ? [project] : [project, ...prev]));
+            setSample(false);
             setDialog(null);
             navigate(`/p/${project.slug}`);
           }}

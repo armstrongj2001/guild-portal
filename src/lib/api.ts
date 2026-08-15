@@ -6,6 +6,9 @@ const projects = [...demoProjects];
 const comments: Record<string, Comment[]> = { ...demoComments };
 const demoCheers = new Set<string>();
 
+/** Sample rows carry `d`-prefixed ids; anything else is a real uuid. */
+const isSample = (id: string) => /^d\d+$/.test(id);
+
 export function slugify(title: string): string {
   const base = title
     .toLowerCase()
@@ -15,8 +18,13 @@ export function slugify(title: string): string {
   return `${base || 'project'}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
-export async function listProjects(): Promise<Project[]> {
-  if (!supabase) return projects.slice().sort(byNewest);
+/**
+ * A live database with nothing in it renders an empty page, which reads as
+ * broken rather than new. Fall back to the samples until the first real
+ * project lands; the banner says which one you are looking at.
+ */
+export async function listProjects(): Promise<{ projects: Project[]; sample: boolean }> {
+  if (!supabase) return { projects: projects.slice().sort(byNewest), sample: true };
 
   const { data, error } = await supabase
     .from('project_feed')
@@ -24,11 +32,15 @@ export async function listProjects(): Promise<Project[]> {
     .order('created_at', { ascending: false });
 
   if (error) throw error;
-  return data as Project[];
+  const live = data as Project[];
+  return live.length
+    ? { projects: live, sample: false }
+    : { projects: projects.slice().sort(byNewest), sample: true };
 }
 
 export async function getProject(slug: string): Promise<Project | null> {
-  if (!supabase) return projects.find((p) => p.slug === slug) ?? null;
+  const sample = projects.find((p) => p.slug === slug);
+  if (!supabase) return sample ?? null;
 
   const { data, error } = await supabase
     .from('project_feed')
@@ -37,7 +49,7 @@ export async function getProject(slug: string): Promise<Project | null> {
     .maybeSingle();
 
   if (error) throw error;
-  return (data as Project) ?? null;
+  return (data as Project) ?? sample ?? null;
 }
 
 export async function createProject(input: NewProject, owner: Profile): Promise<Project> {
@@ -90,7 +102,7 @@ export async function createProject(input: NewProject, owner: Profile): Promise<
 }
 
 export async function listComments(projectId: string): Promise<Comment[]> {
-  if (!supabase) return comments[projectId] ?? [];
+  if (!supabase || isSample(projectId)) return comments[projectId] ?? [];
 
   const { data, error } = await supabase
     .from('comments')
@@ -107,7 +119,7 @@ export async function addComment(
   body: string,
   author: Profile,
 ): Promise<Comment> {
-  if (!supabase) {
+  if (!supabase || isSample(projectId)) {
     const comment: Comment = {
       id: crypto.randomUUID(),
       project_id: projectId,
@@ -140,14 +152,15 @@ export async function listMyCheers(userId: string): Promise<Set<string>> {
 
   const { data, error } = await supabase.from('cheers').select('project_id').eq('user_id', userId);
   if (error) throw error;
-  return new Set(data.map((row) => row.project_id));
+  return new Set([...data.map((row) => row.project_id), ...demoCheers]);
 }
 
 /** Returns the new cheered state. */
 export async function toggleCheer(projectId: string, userId: string): Promise<boolean> {
-  const cheered = !(supabase ? await hasCheered(projectId, userId) : demoCheers.has(projectId));
+  const local = !supabase || isSample(projectId);
+  const cheered = !(local ? demoCheers.has(projectId) : await hasCheered(projectId, userId));
 
-  if (!supabase) {
+  if (local) {
     if (cheered) demoCheers.add(projectId);
     else demoCheers.delete(projectId);
     bumpDemo(projectId, 'cheer_count', cheered ? 1 : -1);
@@ -155,8 +168,8 @@ export async function toggleCheer(projectId: string, userId: string): Promise<bo
   }
 
   const { error } = cheered
-    ? await supabase.from('cheers').insert({ project_id: projectId, user_id: userId })
-    : await supabase.from('cheers').delete().eq('project_id', projectId).eq('user_id', userId);
+    ? await supabase!.from('cheers').insert({ project_id: projectId, user_id: userId })
+    : await supabase!.from('cheers').delete().eq('project_id', projectId).eq('user_id', userId);
 
   if (error) throw error;
   return cheered;
