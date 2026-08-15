@@ -1,5 +1,5 @@
 {
-  "name": "guild-build-log",
+  "name": "guild-portal",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
     "lint": "oxlint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
@@ -23,5 +24,5 @@
     "typescript": "~6.0.2",
     "vite": "^8.2.0"
   },
-  "description": "A public feed of what the AI Builders Guild is shipping."
+  "description": "A place for AI Builders Guild members to share what they're building and get real feedback."
 }

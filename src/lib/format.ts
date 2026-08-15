@@ -14,5 +14,22 @@ export function relativeTime(iso: string): string {
   for (const [unit, size] of UNITS) {
     if (Math.abs(seconds) >= size) return rtf.format(Math.round(seconds / size), unit);
   }
-  return rtf.format(Math.round(seconds), 'second');
+  return 'just now';
+}
+
+export function hostname(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
+export function initials(name: string): string {
+  return name
+    .split(/[\s-_]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]!.toUpperCase())
+    .join('');
 }

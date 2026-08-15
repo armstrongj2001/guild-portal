@@ -17,7 +17,7 @@
   "overrides": [
     {
       "files": [
-        "src/renderers/*.tsx"
+        "src/lib/auth.tsx"
       ],
       "rules": {
         "react/only-export-components": "off"
